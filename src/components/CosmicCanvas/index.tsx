@@ -1,20 +1,12 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 
 interface CosmicCanvasProps {
   selectedColor: string;
   cursorPosition: { x: number; y: number };
   isDrawing: boolean;
   setIsDrawing: (isDrawing: boolean) => void;
-}
-
-interface Particle {
-  x: number;
-  y: number;
-  color: string;
-  size: number;
-  opacity: number;
 }
 
 const SPRAY_SIZE = 20;
@@ -38,7 +30,6 @@ const CosmicCanvas: React.FC<CosmicCanvasProps> = ({
   const sprayParticles = (x: number, y: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
@@ -50,7 +41,6 @@ const CosmicCanvas: React.FC<CosmicCanvasProps> = ({
           Math.sqrt(-2.0 * Math.log(u)) *
           Math.cos(2.0 * Math.PI * v)) /
         3;
-
       const angle = Math.random() * Math.PI * 2;
 
       const px = x + Math.cos(angle) * radius;
@@ -84,6 +74,26 @@ const CosmicCanvas: React.FC<CosmicCanvasProps> = ({
 
   const handleMouseUp = () => setIsDrawing(false);
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    e.preventDefault();
+    if (e.touches.length === 0) return;
+    const touch = e.touches[0];
+    setIsDrawing(true);
+    sprayParticles(touch.clientX, touch.clientY);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    e.preventDefault();
+    if (!isDrawing || e.touches.length === 0) return;
+    const touch = e.touches[0];
+    sprayParticles(touch.clientX, touch.clientY);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    e.preventDefault();
+    setIsDrawing(false);
+  };
+
   return (
     <div className="absolute inset-0 z-10" style={{ mixBlendMode: "screen" }}>
       <canvas
@@ -93,6 +103,10 @@ const CosmicCanvas: React.FC<CosmicCanvasProps> = ({
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
       />
     </div>
   );
