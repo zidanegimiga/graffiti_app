@@ -142,7 +142,7 @@ function HomeContent() {
 </div>
 
         {/* Footer credit */}
-        <div className="fixed bottom-2 right-4 z-40 text-white/50 text-xs pointer-events-none select-none">
+        <div className="fixed bottom-2 right-[50%] z-40 text-white/50 text-xs pointer-events-none select-none">
           Made by Zidane Gimiga
         </div>
       </div>
