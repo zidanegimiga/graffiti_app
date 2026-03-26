@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+"use client"
 import Image from 'next/image'
 import React, { useState } from 'react'
 
@@ -18,11 +19,11 @@ export function ImageWithFallback(props: React.ImgHTMLAttributes<HTMLImageElemen
       style={props.style}
     >
       <div className="flex items-center justify-center w-full h-full">
-        <Image src={ERROR_IMG_SRC} alt="Error loading image" />
+        <img src={ERROR_IMG_SRC} alt="Error loading image" />
       </div>
     </div>
   ) : (
     // @ts-ignore
-    <Image {...props} onError={handleError} alt='' />
+    <img {...props} onError={handleError} alt='' />
   )
 }

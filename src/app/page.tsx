@@ -1,6 +1,14 @@
+"use client";
+
+import { useState } from "react";
 import { ImageWithFallback } from "@/components/ImageWithFallback";
+import CosmicCanvas from "@/components/CosmicCanvas";
 
 export default function Home() {
+  const [selectedColor, setSelectedColor] = useState("#a855f7");
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [isDrawing, setIsDrawing] = useState(false);
+
   return (
     <main className="relative w-screen h-screen overflow-hidden bg-black touch-none select-none">
 
@@ -11,6 +19,13 @@ export default function Home() {
           className="size-full object-cover"
         />
       </div>
+
+      <CosmicCanvas
+        selectedColor={selectedColor}
+        cursorPosition={cursorPosition}
+        isDrawing={isDrawing}
+        setIsDrawing={setIsDrawing}
+      />
 
     </main>
   );
