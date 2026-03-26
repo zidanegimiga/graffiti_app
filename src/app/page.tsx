@@ -1,4 +1,3 @@
-// app/page.tsx
 import { ImageWithFallback } from "@/components/ImageWithFallback";
 
 export default function Home() {
