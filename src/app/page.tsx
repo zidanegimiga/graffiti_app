@@ -76,7 +76,7 @@ function HomeContent() {
   }, []);
 
   return (
-    <main className="relative w-screen h-screen overflow-hidden bg-black touch-none select-none font-space" suppressHydrationWarning>
+    <main className="relative w-screen h-screen overflow-hidden bg-black touch-none select-none font-space">
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
           src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=2000&auto=format&fit=crop"
@@ -91,7 +91,7 @@ function HomeContent() {
             COSMIC INK
           </h1>
           <div className="mt-4 w-12 h-1 px-1 bg-white/20 rounded-full overflow-hidden">
-            <div className="h-full bg-[#3578ff] animate-loader-progress" />
+            {/* <div className="h-full bg-[#3578ff] animate-loader-progress" /> */}
           </div>
         </div>
       )}
@@ -108,6 +108,11 @@ function HomeContent() {
           setIsDrawing={setIsDrawing}
         />
 
+        <div className="fixed bottom-28 left-1/2 -translate-x-1/2 z-20">
+                    <h1 className="text-white text-xl md:text-xl font-bold tracking-tighter animate-cosmic-pop">
+            Select a color and let&apos;s spray paint the galaxy!
+          </h1>
+        </div>
         <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-4 p-3 bg-white/5 backdrop-blur-3xl rounded-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
           {COSMIC_COLORS.map((color) => (
             <button
