@@ -55,7 +55,6 @@ import CosmicCanvas from "@/components/CosmicCanvas";
 import { COSMIC_COLORS } from "@/constants/colors";
 import { ClientOnly } from "@/components/ClientOnly";
 
-
 export default function Home() {
   return (
     <ClientOnly>
@@ -77,6 +76,7 @@ function HomeContent() {
 
   return (
     <main className="relative w-screen h-screen overflow-hidden bg-black touch-none select-none font-space">
+      {/* Background image */}
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
           src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=2000&auto=format&fit=crop"
@@ -85,22 +85,23 @@ function HomeContent() {
         />
       </div>
 
+      {/* Branding overlay */}
       {stage === "branding" && (
         <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/20 backdrop-blur-[2px] animate-overlay-exit">
           <h1 className="text-white text-6xl md:text-9xl font-bold tracking-tighter animate-cosmic-pop">
             COSMIC INK
           </h1>
-          <div className="mt-4 w-12 h-1 px-1 bg-white/20 rounded-full overflow-hidden">
-            {/* <div className="h-full bg-[#3578ff] animate-loader-progress" /> */}
-          </div>
+          <div className="mt-4 w-12 h-1 px-1 bg-white/20 rounded-full overflow-hidden" />
         </div>
       )}
 
+      {/* Main app */}
       <div
         className={`relative z-10 w-full h-full transition-all duration-1000 ease-in-out ${
           stage === "app" ? "opacity-100 scale-100" : "opacity-0 scale-95"
         }`}
       >
+        {/* Canvas */}
         <CosmicCanvas
           selectedColor={selectedColor}
           cursorPosition={cursorPosition}
@@ -108,11 +109,12 @@ function HomeContent() {
           setIsDrawing={setIsDrawing}
         />
 
-        <div className="fixed bottom-28 left-1/2 -translate-x-1/2 z-20">
-                    <h1 className="text-white text-xl md:text-xl font-bold tracking-tighter animate-cosmic-pop">
-            Select a color and let&apos;s spray paint the galaxy!
-          </h1>
+        {/* Caption above the color picker */}
+        <div className="absolute bottom-28 left-1/2 -translate-x-1/2 z-30 text-white text-sm md:text-base font-medium pointer-events-none select-none">
+          Select a color and start painting!
         </div>
+
+        {/* Color picker */}
         <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-4 p-3 bg-white/5 backdrop-blur-3xl rounded-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
           {COSMIC_COLORS.map((color) => (
             <button
@@ -127,6 +129,11 @@ function HomeContent() {
               title={color.name}
             />
           ))}
+        </div>
+
+        {/* Footer credit */}
+        <div className="fixed bottom-2 right-4 z-40 text-white/50 text-xs pointer-events-none select-none">
+          Made by Zidane Gimiga
         </div>
       </div>
     </main>
