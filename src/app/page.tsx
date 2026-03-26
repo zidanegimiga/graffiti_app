@@ -63,6 +63,13 @@ export default function Home() {
   );
 }
 
+/*************  ✨ Windsurf Command ⭐  *************/
+/**
+ * The main content of the app, containing the branding overlay, main app, caption, color picker, and footer credit.
+ *
+ * @returns {JSX.Element} The main content of the app.
+ */
+/*******  85dbfbb8-ef47-49ee-af13-d849340eac7f  *******/
 function HomeContent() {
   const [stage, setStage] = useState<"branding" | "app">("branding");
   const [selectedColor, setSelectedColor] = useState(COSMIC_COLORS[0].hex);
@@ -88,9 +95,9 @@ function HomeContent() {
       {/* Branding overlay */}
       {stage === "branding" && (
         <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/20 backdrop-blur-[2px] animate-overlay-exit">
-          <h1 className="text-white text-6xl md:text-9xl font-bold tracking-tighter animate-cosmic-pop">
+          <p className="text-white text-3xl md:text-3xl font-bold tracking-tighter animate-cosmic-pop italic">
             COSMIC INK
-          </h1>
+          </p>
           <div className="mt-4 w-12 h-1 px-1 bg-white/20 rounded-full overflow-hidden" />
         </div>
       )}
@@ -115,21 +122,24 @@ function HomeContent() {
         </div>
 
         {/* Color picker */}
-        <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-4 p-3 bg-white/5 backdrop-blur-3xl rounded-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-          {COSMIC_COLORS.map((color) => (
-            <button
-              key={color.hex}
-              onClick={() => setSelectedColor(color.hex)}
-              className={`w-12 h-12 rounded-2xl transition-all duration-500 active:scale-75 ${
-                selectedColor === color.hex
-                  ? "scale-110 -rotate-6 shadow-[0_0_25px_-5px_rgba(255,255,255,0.4)] ring-2 ring-white"
-                  : "opacity-40 hover:opacity-100 hover:-rotate-3"
-              }`}
-              style={{ backgroundColor: color.hex }}
-              title={color.name}
-            />
-          ))}
-        </div>
+<div
+  className="fixed left-1/2 z-20 flex gap-4 p-3 bg-white/5 backdrop-blur-3xl rounded-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] -translate-x-1/2"
+  style={{ bottom: "calc(1rem + env(safe-area-inset-bottom))" }}
+>
+  {COSMIC_COLORS.map((color) => (
+    <button
+      key={color.hex}
+      onClick={() => setSelectedColor(color.hex)}
+      className={`w-12 h-12 rounded-2xl transition-all duration-500 active:scale-75 ${
+        selectedColor === color.hex
+          ? "scale-110 -rotate-6 shadow-[0_0_25px_-5px_rgba(255,255,255,0.4)] ring-2 ring-white"
+          : "opacity-40 hover:opacity-100 hover:-rotate-3"
+      }`}
+      style={{ backgroundColor: color.hex }}
+      title={color.name}
+    />
+  ))}
+</div>
 
         {/* Footer credit */}
         <div className="fixed bottom-2 right-4 z-40 text-white/50 text-xs pointer-events-none select-none">
