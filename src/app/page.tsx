@@ -116,15 +116,15 @@ function HomeContent() {
           setIsDrawing={setIsDrawing}
         />
 
-        {/* Caption above the color picker */}
-        <div className="absolute bottom-28 left-1/2 -translate-x-1/2 z-30 text-white text-sm md:text-base font-medium pointer-events-none select-none">
-          Select a color and start painting!
-        </div>
+{/* Vertical color picker on the right */}
+{/* Rotated caption outside of the panel */}
+<div className="fixed top-1/2 right-10 z-20 transform -translate-y-1/2 -rotate-90 text-white text-xs md:text-sm font-medium select-none pointer-events-none whitespace-nowrap">
+  Select a color and start painting!
+</div>
 
-        {/* Color picker */}
+{/* Vertical color picker panel */}
 <div
-  className="fixed left-1/2 z-20 flex gap-4 p-3 bg-white/5 backdrop-blur-3xl rounded-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] -translate-x-1/2"
-  style={{ bottom: "calc(1rem + env(safe-area-inset-bottom))" }}
+  className="fixed top-1/2 right-4 z-20 flex flex-col items-center gap-4 p-3 bg-white/5 backdrop-blur-3xl rounded-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] -translate-y-1/2"
 >
   {COSMIC_COLORS.map((color) => (
     <button
