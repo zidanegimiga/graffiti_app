@@ -8,6 +8,7 @@ import CosmicPanel from "@/components/CosmicPanel";
 import { LightWand } from "@/components/LightWand";
 import { COSMIC_COLORS } from "@/constants/colors";
 import EntryAnimation from "@/components/EntryAnimation";
+import HintToast from "@/components/HintToast.tsx";
 
 export default function Home() {
   const [selectedColor, setSelectedColor] = useState(COSMIC_COLORS[0].hex);
@@ -60,6 +61,9 @@ export default function Home() {
       style={{ cursor: isOverToolbar ? "auto" : "none" }}
     >
       {showEntry && <EntryAnimation onComplete={() => setShowEntry(false)} />}
+      {!showEntry && (
+        <HintToast message="Select a color — then paint the cosmos" />
+      )}
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
           src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=2000&auto=format&fit=crop"
