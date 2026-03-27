@@ -1,38 +1,34 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
+import { ImageWithFallback } from "@/components/ImageWithFallback";
 import CosmicCanvas from "@/components/CosmicCanvas";
 import CosmicToolbar from "@/components/CosmicToolbar";
-import { ImageWithFallback } from "@/components/ImageWithFallback";
+import CosmicPanel from "@/components/CosmicPanel";
 import { LightWand } from "@/components/LightWand";
 import { COSMIC_COLORS } from "@/constants/colors";
-import { useState, useEffect } from "react";
 
 export default function Home() {
   const [selectedColor, setSelectedColor] = useState(COSMIC_COLORS[0].hex);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isDrawing, setIsDrawing] = useState(false);
+  const [spraySize, setSpraySize] = useState(20);
+  const [sprayDensity, setSprayDensity] = useState(30);
+  const [isOverToolbar, setIsOverToolbar] = useState(false);
+
+  const clearCanvasRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setCursorPosition({ x: e.clientX, y: e.clientY });
     };
-
     const handleTouchMove = (e: TouchEvent) => {
-      if (e.touches.length > 0) {
-        setCursorPosition({
-          x: e.touches[0].clientX,
-          y: e.touches[0].clientY,
-        });
-      }
+      if (e.touches.length > 0)
+        setCursorPosition({ x: e.touches[0].clientX, y: e.touches[0].clientY });
     };
-
     const handleTouchStart = (e: TouchEvent) => {
-      if (e.touches.length > 0) {
-        setCursorPosition({
-          x: e.touches[0].clientX,
-          y: e.touches[0].clientY,
-        });
-      }
+      if (e.touches.length > 0)
+        setCursorPosition({ x: e.touches[0].clientX, y: e.touches[0].clientY });
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -46,7 +42,9 @@ export default function Home() {
     };
   }, []);
 
-  const sprayOrigin = { x: cursorPosition.x, y: cursorPosition.y };
+  const handleClear = () => {
+    document.getElementById("cosmic-clear-btn")?.click();
+  };
 
   const wandStyle = {
     left: cursorPosition.x,
@@ -55,7 +53,10 @@ export default function Home() {
   };
 
   return (
-    <main className="relative w-screen h-screen overflow-hidden bg-black touch-none select-none cursor-none">
+    <main
+      className="relative w-screen h-screen overflow-hidden bg-black touch-none select-none"
+      style={{ cursor: isOverToolbar ? "auto" : "none" }}
+    >
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
           src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=2000&auto=format&fit=crop"
@@ -66,21 +67,42 @@ export default function Home() {
 
       <CosmicCanvas
         selectedColor={selectedColor}
-        cursorPosition={sprayOrigin}
+        cursorPosition={{ x: cursorPosition.x, y: cursorPosition.y }}
         isDrawing={isDrawing}
         setIsDrawing={setIsDrawing}
+        spraySize={spraySize}
+        sprayDensity={sprayDensity}
       />
 
-      <div className="absolute bottom-0 left-0 right-0 z-10">
+      <div
+        className="absolute bottom-0 left-0 right-0 z-10"
+        onMouseEnter={() => setIsOverToolbar(true)}
+        onMouseLeave={() => setIsOverToolbar(false)}
+      >
         <CosmicToolbar
           selectedColor={selectedColor}
           onSelectColor={setSelectedColor}
         />
       </div>
 
-      <div className="pointer-events-none fixed z-20" style={wandStyle}>
-        <LightWand color={selectedColor} isSelected={true} asCursor={true} />
+      <div
+        onMouseEnter={() => setIsOverToolbar(true)}
+        onMouseLeave={() => setIsOverToolbar(false)}
+      >
+        <CosmicPanel
+          spraySize={spraySize}
+          sprayDensity={sprayDensity}
+          onSizeChange={setSpraySize}
+          onDensityChange={setSprayDensity}
+          onClear={handleClear}
+        />
       </div>
+
+      {!isOverToolbar && (
+        <div className="pointer-events-none fixed z-20" style={wandStyle}>
+          <LightWand color={selectedColor} isSelected={true} asCursor={true} />
+        </div>
+      )}
     </main>
   );
 }
