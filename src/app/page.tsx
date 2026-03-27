@@ -7,6 +7,7 @@ import CosmicToolbar from "@/components/CosmicToolbar";
 import CosmicPanel from "@/components/CosmicPanel";
 import { LightWand } from "@/components/LightWand";
 import { COSMIC_COLORS } from "@/constants/colors";
+import EntryAnimation from "@/components/EntryAnimation";
 
 export default function Home() {
   const [selectedColor, setSelectedColor] = useState(COSMIC_COLORS[0].hex);
@@ -15,6 +16,7 @@ export default function Home() {
   const [spraySize, setSpraySize] = useState(20);
   const [sprayDensity, setSprayDensity] = useState(30);
   const [isOverToolbar, setIsOverToolbar] = useState(false);
+  const [showEntry, setShowEntry] = useState(true);
 
   const clearCanvasRef = useRef<(() => void) | null>(null);
 
@@ -57,6 +59,7 @@ export default function Home() {
       className="relative w-screen h-screen overflow-hidden bg-black touch-none select-none"
       style={{ cursor: isOverToolbar ? "auto" : "none" }}
     >
+      {showEntry && <EntryAnimation onComplete={() => setShowEntry(false)} />}
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
           src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=2000&auto=format&fit=crop"
