@@ -26,27 +26,30 @@ const HintToast: React.FC<HintToastProps> = ({ message, delay = 5000 }) => {
 
   return (
     <div
-      className="fixed top-6 left-1/2 -translate-x-1/2 z-40
-                 px-5 py-3 rounded-full flex items-center gap-2
-                 pointer-events-none"
+      className="fixed bottom-36 left-1/2 z-40 pointer-events-none
+                 px-6 py-3 rounded-full flex items-center gap-3"
       style={{
-        background: "rgba(5,5,20,0.9)",
-        backdropFilter: "blur(16px)",
-        border: "1px solid rgba(255,255,255,0.1)",
-        boxShadow: "0 0 20px rgba(168,85,247,0.25)",
-        opacity: phase === "visible" ? 1 : 0,
-        transition: "opacity 600ms ease",
         transform: `translateX(-50%) translateY(${
-          phase === "visible" ? "0px" : "-8px"
+          phase === "visible" ? "0px" : "10px"
         })`,
+        opacity: phase === "visible" ? 1 : 0,
+        transition: "opacity 600ms ease, transform 600ms ease",
+        background: "rgba(168,85,247,0.18)",
+        backdropFilter: "blur(16px)",
+        border: "1px solid rgba(168,85,247,0.5)",
+        boxShadow:
+          "0 0 24px rgba(168,85,247,0.4), inset 0 0 12px rgba(168,85,247,0.1)",
       }}
     >
       <span
-        className="w-2 h-2 rounded-full animate-pulse"
-        style={{ backgroundColor: "#a855f7" }}
+        className="w-2.5 h-2.5 rounded-full animate-pulse shrink-0"
+        style={{
+          backgroundColor: "#a855f7",
+          boxShadow: "0 0 8px #a855f7",
+        }}
       />
       <span
-        className="text-white/70 text-xs tracking-wide whitespace-nowrap"
+        className="text-white text-sm tracking-widest whitespace-nowrap"
         style={{ fontFamily: "var(--font-cinzel)" }}
       >
         {message}

@@ -51,7 +51,7 @@ const EntryAnimation: React.FC<EntryAnimationProps> = ({ onComplete }) => {
 
       <div className="relative flex flex-col items-center gap-4">
         <h1
-          className="text-6xl md:text-8xl font-bold tracking-widest text-transparent bg-clip-text text-white"
+          className="text-4xl md:text-8xl font-bold tracking-widest text-transparent bg-clip-text text-white"
           style={{
             fontFamily: "var(--font-cinzel)",
             // backgroundImage:
