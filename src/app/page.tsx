@@ -82,7 +82,7 @@ export default function Home() {
       />
 
       <div
-        className="absolute bottom-0 left-0 right-0 z-10"
+        className="absolute bottom-0 left-0 right-0 z-10 pb-safe"
         onMouseEnter={() => setIsOverToolbar(true)}
         onMouseLeave={() => setIsOverToolbar(false)}
       >

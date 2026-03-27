@@ -26,7 +26,7 @@ const HintToast: React.FC<HintToastProps> = ({ message, delay = 5000 }) => {
 
   return (
     <div
-      className="fixed bottom-36 left-1/2 z-40 pointer-events-none
+      className="fixed bottom-48 left-1/2 z-40 pointer-events-none
                  px-6 py-3 rounded-full flex items-center gap-3"
       style={{
         transform: `translateX(-50%) translateY(${

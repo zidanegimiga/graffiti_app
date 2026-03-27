@@ -31,10 +31,12 @@ const EntryAnimation: React.FC<EntryAnimationProps> = ({ onComplete }) => {
         opacity: phase === "fading" ? 0 : 1,
         pointerEvents: phase === "fading" ? "none" : "auto",
       }}
+      suppressHydrationWarning
     >
       <div className="absolute inset-0 overflow-hidden">
         {Array.from({ length: 60 }).map((_, i) => (
           <div
+          suppressHydrationWarning
             key={i}
             className="absolute rounded-full bg-white"
             style={{
@@ -49,7 +51,7 @@ const EntryAnimation: React.FC<EntryAnimationProps> = ({ onComplete }) => {
         ))}
       </div>
 
-      <div className="relative flex flex-col items-center gap-4">
+      <div className="relative flex flex-col items-center gap-4" suppressHydrationWarning>
         <h1
           className="text-4xl md:text-8xl font-bold tracking-widest text-transparent bg-clip-text text-white"
           style={{
@@ -74,7 +76,7 @@ const EntryAnimation: React.FC<EntryAnimationProps> = ({ onComplete }) => {
         </p>
       </div>
 
-      <style>{`
+      <style suppressHydrationWarning>{`
         @keyframes fadeSlideUp {
           from {
             opacity: 0;
