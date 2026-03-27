@@ -26,12 +26,10 @@ const HintToast: React.FC<HintToastProps> = ({ message, delay = 5000 }) => {
 
   return (
     <div
-      className="fixed bottom-48 left-1/2 z-40 pointer-events-none
+      className="fixed bottom-48 right-20 md:bottom-48 md:right-auto md:left-1/2 z-40 pointer-events-none
                  px-6 py-3 rounded-full flex items-center gap-3"
       style={{
-        transform: `translateX(-50%) translateY(${
-          phase === "visible" ? "0px" : "10px"
-        })`,
+        transform: `translateX(${phase === "visible" ? "0px" : "10px"})`,
         opacity: phase === "visible" ? 1 : 0,
         transition: "opacity 600ms ease, transform 600ms ease",
         background: "rgba(168,85,247,0.18)",

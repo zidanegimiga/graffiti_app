@@ -62,7 +62,7 @@ export default function Home() {
     >
       {showEntry && <EntryAnimation onComplete={() => setShowEntry(false)} />}
       {!showEntry && (
-        <HintToast message="Select a color — then paint the cosmos" />
+        <HintToast message="Select a color" />
       )}
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
@@ -82,13 +82,26 @@ export default function Home() {
       />
 
       <div
-        className="absolute bottom-0 left-0 right-0 z-10 pb-safe"
+        className="hidden md:block absolute bottom-0 left-0 right-0 z-10 pb-safe"
         onMouseEnter={() => setIsOverToolbar(true)}
         onMouseLeave={() => setIsOverToolbar(false)}
       >
         <CosmicToolbar
           selectedColor={selectedColor}
           onSelectColor={setSelectedColor}
+          onClear={handleClear}
+        />
+      </div>
+
+      <div
+        className="md:hidden"
+        onMouseEnter={() => setIsOverToolbar(true)}
+        onMouseLeave={() => setIsOverToolbar(false)}
+      >
+        <CosmicToolbar
+          selectedColor={selectedColor}
+          onSelectColor={setSelectedColor}
+          onClear={handleClear}
         />
       </div>
 
